@@ -1,5 +1,5 @@
 # AWS S3 Demo with MERN
-(Live Version)[https://aws-s3-mern-demo.herokuapp.com/#/]
+[Live Version](https://aws-s3-mern-demo.herokuapp.com/#/)
 
 ## Set Up
 #### Packages to install in your backend
