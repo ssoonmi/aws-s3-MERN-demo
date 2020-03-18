@@ -51,4 +51,4 @@ In there, you will set your aws credentials.
 If you don't want your 
 
 
-![Bucket Permissions](https://raw.githubusercontent.com/ssoonmi/aws-s3-MERN-demo/assets/bucket_permissions.png)
+![Bucket Permissions](assets/bucket_permissions.png)
