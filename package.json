@@ -7,7 +7,10 @@
     "start": "node app.js",
     "server": "nodemon --inspect app.js --ignore frontend",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+    "frontend-build": "npm run build --prefix frontend",
+    "frontend-install": "npm install --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "heroku-postbuild": "npm run frontend-install && npm run frontend-build"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +20,6 @@
     "body-parser": "^1.19.0",
     "concurrently": "^5.1.0",
     "express": "^4.17.1",
-    "formidable": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",
     "morgan": "^1.9.1",
@@ -28,5 +30,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "12.16.1"
   }
 }

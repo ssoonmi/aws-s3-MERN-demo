@@ -30,6 +30,7 @@ router.post("/", singleMulterUpload("image"), async (req, res) => {
   userData.image = await singlePrivateFileUpload(req.file);
   const user = new User(userData);
   await user.save();
+  user.image = retrievePrivateFile(user.image);
   res.json(user);
 });
 
