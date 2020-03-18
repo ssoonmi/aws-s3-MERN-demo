@@ -14,11 +14,13 @@ const {
 
 router.get("/", async (req, res) => {
   let users = await User.find({});
+  
   // if single image is private file:
   users = users.map(user => {
     user.image = retrievePrivateFile(user.image);
     return user;
   });
+
   res.json(users);
 });
 

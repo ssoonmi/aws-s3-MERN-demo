@@ -62,14 +62,14 @@ const multiplePrivateFileUpload = async (files) => {
 };
 
 const retrievePrivateFile = (key) => {
-  let imageUrl;
+  let fileUrl;
   if (key) {
-    imageUrl = s3.getSignedUrl("getObject", {
+    fileUrl = s3.getSignedUrl("getObject", {
       Bucket: NAME_OF_BUCKET,
       Key: key
     });
   }
-  return imageUrl || key;
+  return fileUrl || key;
 };
 
 const storage = multer.memoryStorage({
@@ -79,9 +79,7 @@ const storage = multer.memoryStorage({
 });
 
 const singleMulterUpload = (nameOfKey) => multer({ storage: storage }).single(nameOfKey);
-const multipleMulterUpload = (nameOfKey) => {
-  return multer({ storage: storage }).array(nameOfKey);
-};
+const multipleMulterUpload = (nameOfKey) => multer({ storage: storage }).array(nameOfKey);
 
 module.exports = { 
   s3, 
