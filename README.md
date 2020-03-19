@@ -3,8 +3,8 @@
 
 ## Set Up
 #### Packages to install in your backend
-- multer
-- aws-sdk
+- [multer](https://www.npmjs.com/package/multer)
+- [aws-sdk](https://www.npmjs.com/package/aws-sdk)
 
 #### Create your AWS User and Bucket
 Navigate to [https://s3.console.aws.amazon.com/s3/home?region=us-east-1](https://s3.console.aws.amazon.com/s3/home?region=us-east-1) click on “create bucket”, enter a name, choose a region, and leave all other options as default.
