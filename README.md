@@ -6,13 +6,47 @@
 - multer
 - aws-sdk
 
-#### Create your AWS Bucket
+#### Create your AWS User and Bucket
 Navigate to [https://s3.console.aws.amazon.com/s3/home?region=us-east-1](https://s3.console.aws.amazon.com/s3/home?region=us-east-1) click on “create bucket”, enter a name, choose a region, and leave all other options as default.
+
+Head to [https://console.aws.amazon.com/iam/home?#/users](https://console.aws.amazon.com/iam/home?#/users) to create a new user. Name the user whatever you like. Give the user `Programmatic access`. Proceed to the next step. Now we need to set up the security policy for our new user. This is how they will be allowed to connect. Click 'Attach existing policies directly' and then 'Create Policy'. This will open up a new tab. 
+
+In the new tab, click the `JSON` tab and paste the following: 
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1420751757000",
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<NAME OF BUCKET>"
+            ]
+        }
+    ]
+}
+```
+
+Make sure to replace `<NAME OF BUCKET>` with the name of your bucket.
+
+Give the policy whatever name you like (e.g. s3-access-to-name-of-project). After you save it, head back over to the other tab/window where you are creating a new user.
+
+Click the refresh button all the way to the right of the `Create User` button then search for the policy that you just created. Check that policy then head over to the next step. Create the user. 
+
+After you create the user, you will get the `Access Key ID` and the `Secret Access Key`. **Store this somewhere safe on your computer**
 
 ## Set up AWS S3 in your backend
 ### [`awsS3.js`](https://github.com/ssoonmi/aws-s3-MERN-demo/blob/master/awsS3.js)
 Make a file called `awsS3.js` at the root of your project. [Link to file](https://github.com/ssoonmi/aws-s3-MERN-demo/blob/master/awsS3.js)
-In there, you will use the package, `aws-sdk`, set up your credentials for aws, and then export it.
+Copy the contents of [this file](https://github.com/ssoonmi/aws-s3-MERN-demo/blob/master/awsS3.js) into the file you just created.
+
+**Rename the `NAME_OF_BUCKET` constant at the top of the `awsS3.js` file.**
+
+In there, you will see that we use the package, `aws-sdk`, set up your credentials for aws, and then export it.
 
 ```javascript
 const AWS = require("aws-sdk");
@@ -23,6 +57,7 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 module.exports = { s3 };
 ```
+
 #### `AWS.config.loadFromPath`
 This function is allowing us to configure our aws keys using a json file. 
 > You can learn more about how this works here:
@@ -35,10 +70,8 @@ You do not need a credentials.json in production. Instead, all you need to do is
 > [https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html)
 
 ### `credentials.json`
-> [How to Get Your Access Keys](https://help.bittitan.com/hc/en-us/articles/115008255268-How-do-I-find-my-AWS-Access-Key-and-Secret-Access-Key-)
-
 Make a file called `credentials.json` **at the root** of your project.
-In there, you will set your aws credentials.
+In there, you will set your aws credentials that you got when you created the AWS User.
 ```json
 {
   "accessKeyId": "<Your AWS Access Key ID>",
