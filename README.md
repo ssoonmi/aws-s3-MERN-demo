@@ -23,9 +23,7 @@ In the new tab, click the `JSON` tab and paste the following:
             "Action": [
                 "s3:*"
             ],
-            "Resource": [
-                "arn:aws:s3:::<NAME OF BUCKET>"
-            ]
+            "Resource": "arn:aws:s3:::<NAME OF BUCKET>/*"
         }
     ]
 }
