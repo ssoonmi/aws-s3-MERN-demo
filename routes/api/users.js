@@ -15,7 +15,7 @@ const {
 router.get("/", async (req, res) => {
   let users = await User.find({});
   
-  // if single image is private file:
+  // if single image is private file include the following 4 lines:
   users = users.map(user => {
     user.image = retrievePrivateFile(user.image);
     return user;
